@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    @apply bg-notion-bg text-notion-text font-sans antialiased;
+    font-size: 15px;
+  }
+  #root {
+    width: 100%;
+    min-height: 100svh;
+  }
+  input, textarea, select {
+    outline: none;
+  }
+}
+
+@layer components {
+  .page-container {
+    @apply max-w-2xl mx-auto px-4 pb-24;
+  }
+  .card {
+    @apply bg-notion-bg border border-notion-border rounded-lg;
+  }
+  .divider {
+    @apply border-t border-notion-border;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
