@@ -104,3 +104,14 @@ Defined in `tailwind.config.js` under `theme.extend.colors.notion`:
 npm run dev     # starts at http://localhost:5173
 npm run build   # production build
 ```
+
+## Git workflow
+After completing any meaningful unit of work — a feature, bug fix, config change, or anything that should not be lost — commit and push immediately:
+
+```
+git add <specific files>
+git commit -m "<type>: short description of what changed and why"
+git push
+```
+
+Commit message types: `feat`, `fix`, `chore`, `refactor`, `style`. Keep messages specific (e.g. `feat: add rest timer between sets` not `update files`). Never batch unrelated changes into one commit. Push after every commit — do not let work sit only in the local repo.
