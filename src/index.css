@@ -20,6 +20,7 @@
   }
   input, textarea, select {
     outline: none;
+    font-size: 16px; /* prevent iOS Safari auto-zoom on focus */
   }
 }
 
