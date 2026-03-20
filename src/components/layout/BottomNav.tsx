@@ -8,7 +8,7 @@ const tabs = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-notion-bg border-t border-notion-border">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-notion-bg border-t border-notion-border pb-[env(safe-area-inset-bottom)]">
       <div className="max-w-2xl mx-auto flex">
         {tabs.map(tab => (
           <NavLink

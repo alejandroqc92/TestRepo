@@ -12,7 +12,7 @@ export function PageHeader({ title, subtitle, backTo, right }: PageHeaderProps) 
   const navigate = useNavigate()
 
   return (
-    <div className="sticky top-0 z-30 bg-notion-bg/95 backdrop-blur-sm border-b border-notion-border">
+    <div className="safe-top sticky top-0 z-30 bg-notion-bg/95 backdrop-blur-sm border-b border-notion-border">
       <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3 min-h-[52px]">
         {backTo && (
           <button
