@@ -27,7 +27,7 @@ export function WeeklyView() {
   return (
     <div>
       {/* Header */}
-      <div className="sticky top-0 z-30 bg-notion-bg/95 backdrop-blur-sm border-b border-notion-border">
+      <div className="pt-[env(safe-area-inset-top)] sticky top-0 z-30 bg-notion-bg/95 backdrop-blur-sm border-b border-notion-border">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-2">
           <div className="flex-1">
             <h1 className="text-base font-semibold text-notion-text">Workout Tracker</h1>
