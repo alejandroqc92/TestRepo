@@ -15,7 +15,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             className={[
-              'w-full bg-notion-bg border border-notion-border rounded-md px-3 py-2 text-sm text-notion-text',
+              'w-full bg-notion-bg border border-notion-border rounded-md px-3 py-2 text-[16px] text-notion-text',
               'placeholder:text-notion-text-tertiary',
               'focus:border-notion-text transition-colors min-h-[40px]',
               error ? 'border-notion-red' : '',

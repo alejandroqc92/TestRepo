@@ -155,7 +155,7 @@ export function ExerciseDetail() {
                 onChange={e => setTargetSets(e.target.value)}
                 placeholder="—"
                 min="1"
-                className="w-12 text-center text-sm border border-notion-border rounded px-1 py-0.5 bg-notion-bg text-notion-text focus:outline-none focus:border-notion-accent transition-colors"
+                className="w-12 text-center text-[16px] border border-notion-border rounded px-1 py-0.5 bg-notion-bg text-notion-text focus:outline-none focus:border-notion-accent transition-colors"
               />
               <span className="text-xs text-notion-text-tertiary">target</span>
             </div>
