@@ -1,6 +1,7 @@
 import { useAppStore } from '@/hooks/useAppStore'
+import { useAuth } from '@/store/AuthContext'
 import { WeightUnit } from '@/types'
-import { Modal } from '@/components/ui'
+import { Modal, Button } from '@/components/ui'
 import { ALL_MUSCLE_GROUPS } from '@/constants/muscleGroups'
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 export function SettingsModal({ open, onClose }: Props) {
   const { state, dispatch } = useAppStore()
+  const { signOut } = useAuth()
   const { settings } = state
 
   return (
@@ -77,6 +79,11 @@ export function SettingsModal({ open, onClose }: Props) {
               )
             })}
           </div>
+        </div>
+        <div className="pt-4 mt-4 border-t border-notion-border">
+          <Button variant="ghost" size="md" onClick={signOut} className="w-full text-notion-text-secondary">
+            Sign out
+          </Button>
         </div>
       </div>
     </Modal>

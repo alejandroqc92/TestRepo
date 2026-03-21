@@ -1,4 +1,4 @@
-import { type Exercise, type SessionExercise, type SetEntry, type UserSettings, type RunEntry, MuscleGroup } from '@/types'
+import { type AppState, type Exercise, type SessionExercise, type SetEntry, type UserSettings, type RunEntry, MuscleGroup } from '@/types'
 
 export type Action =
   // Sessions
@@ -39,3 +39,6 @@ export type Action =
   // Settings
   | { type: 'UPDATE_SETTINGS'; payload: Partial<UserSettings> }
   | { type: 'TOGGLE_REQUIRED_GROUP'; payload: { group: MuscleGroup } }
+
+  // State hydration
+  | { type: 'LOAD_STATE'; payload: AppState }

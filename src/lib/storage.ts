@@ -1,8 +1,8 @@
 import { type AppState, WeightUnit } from '@/types'
 import { DEFAULT_EXERCISES } from '@/constants/defaultExercises'
 import { DEFAULT_REQUIRED_GROUPS } from '@/constants/muscleGroups'
+import { supabase } from '@/lib/supabase'
 
-const STORAGE_KEY = 'workout_tracker_v1'
 const SCHEMA_VERSION = 1
 
 export function getInitialState(): AppState {
@@ -19,28 +19,28 @@ export function getInitialState(): AppState {
   }
 }
 
-export function loadState(): AppState {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return getInitialState()
-    const parsed = JSON.parse(raw) as Partial<AppState>
-    // Merge with initial to handle missing fields after schema changes
-    const initial = getInitialState()
-    return {
-      ...initial,
-      ...parsed,
-      settings: { ...initial.settings, ...parsed.settings },
-      exercises: parsed.exercises?.length ? parsed.exercises : initial.exercises,
-    }
-  } catch {
-    return getInitialState()
+export async function loadState(userId: string): Promise<AppState> {
+  const { data, error } = await supabase
+    .from('user_data')
+    .select('state')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  if (error || !data) return getInitialState()
+
+  const parsed = data.state as Partial<AppState>
+  const initial = getInitialState()
+  return {
+    ...initial,
+    ...parsed,
+    settings: { ...initial.settings, ...parsed.settings },
+    exercises: parsed.exercises?.length ? parsed.exercises : initial.exercises,
   }
 }
 
-export function saveState(state: AppState): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  } catch {
-    // Storage quota exceeded or unavailable — silently ignore
-  }
+export async function saveState(userId: string, state: AppState): Promise<void> {
+  await supabase.from('user_data').upsert(
+    { user_id: userId, state, updated_at: new Date().toISOString() },
+    { onConflict: 'user_id' },
+  )
 }

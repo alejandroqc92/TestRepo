@@ -335,6 +335,9 @@ export function reducer(state: AppState, action: Action): AppState {
       return { ...state, settings: { ...state.settings, requiredMuscleGroups: next } }
     }
 
+    case 'LOAD_STATE':
+      return action.payload
+
     default:
       return state
   }
