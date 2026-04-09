@@ -14,6 +14,7 @@ export type Action =
 
   // Exercises within session
   | { type: 'ADD_EXERCISE_TO_SESSION'; payload: { sessionId: string; sessionExercise: SessionExercise } }
+  | { type: 'COPY_EXERCISES_FROM_SESSION'; payload: { targetSessionId: string; exercises: SessionExercise[] } }
   | { type: 'REMOVE_EXERCISE_FROM_SESSION'; payload: { sessionId: string; sessionExerciseId: string } }
   | { type: 'TOGGLE_EXERCISE_COMPLETE'; payload: { sessionId: string; sessionExerciseId: string } }
   | { type: 'REORDER_EXERCISES'; payload: { sessionId: string; orderedIds: string[] } }

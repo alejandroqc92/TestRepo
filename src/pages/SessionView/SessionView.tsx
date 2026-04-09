@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/layout/PageHeader'
 import { SessionTimer } from '@/components/session/SessionTimer'
 import { ExerciseRow } from '@/components/session/ExerciseRow'
 import { AddExerciseModal } from '@/components/session/AddExerciseModal'
+import { CopyRoutineModal } from '@/components/session/CopyRoutineModal'
 import { Button, EmptyState } from '@/components/ui'
 import { formatDate } from '@/lib/dateUtils'
 
@@ -13,6 +14,7 @@ export function SessionView() {
   const { state, dispatch } = useAppStore()
   const navigate = useNavigate()
   const [showAdd, setShowAdd] = useState(false)
+  const [showCopy, setShowCopy] = useState(false)
 
   const session = state.sessions.find(s => s.id === id)
   if (!session) {
@@ -86,9 +88,14 @@ export function SessionView() {
               title="No exercises yet"
               description="Add exercises to this session to start tracking your workout."
               action={
-                <Button onClick={() => setShowAdd(true)} variant="primary">
-                  Add Exercise
-                </Button>
+                <div className="flex flex-col items-center gap-2">
+                  <Button onClick={() => setShowAdd(true)} variant="primary">
+                    Add Exercise
+                  </Button>
+                  <Button onClick={() => setShowCopy(true)} variant="ghost" size="sm" className="text-notion-text-secondary">
+                    Copy from past session
+                  </Button>
+                </div>
               }
             />
           ) : (
@@ -98,14 +105,22 @@ export function SessionView() {
                 .map(ex => (
                   <ExerciseRow key={ex.id} sessionId={session.id} sessionExercise={ex} />
                 ))}
-              <div className="px-4 py-3">
+              <div className="px-4 py-3 flex gap-3">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowAdd(true)}
-                  className="text-notion-text-secondary w-full justify-start gap-1"
+                  className="text-notion-text-secondary justify-start gap-1"
                 >
                   <span className="text-base leading-none">+</span> Add Exercise
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowCopy(true)}
+                  className="text-notion-text-secondary justify-start gap-1"
+                >
+                  Copy routine
                 </Button>
               </div>
             </>
@@ -136,6 +151,11 @@ export function SessionView() {
         onClose={() => setShowAdd(false)}
         sessionId={session.id}
         alreadyAdded={alreadyAdded}
+      />
+      <CopyRoutineModal
+        open={showCopy}
+        onClose={() => setShowCopy(false)}
+        sessionId={session.id}
       />
     </div>
   )

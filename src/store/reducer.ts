@@ -101,6 +101,18 @@ export function reducer(state: AppState, action: Action): AppState {
       }
     }
 
+    case 'COPY_EXERCISES_FROM_SESSION': {
+      const { targetSessionId, exercises } = action.payload
+      return {
+        ...state,
+        sessions: state.sessions.map(s =>
+          s.id === targetSessionId
+            ? { ...s, exercises: [...s.exercises, ...exercises] }
+            : s,
+        ),
+      }
+    }
+
     case 'REMOVE_EXERCISE_FROM_SESSION': {
       return {
         ...state,
